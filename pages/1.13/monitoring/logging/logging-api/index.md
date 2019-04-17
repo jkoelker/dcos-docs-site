@@ -19,7 +19,7 @@ The Logging API has been updated significantly for DC/OS 1.11 and later.
 
 In versions of DC/OS prior to 1.11, task logs were available via [files API](http://mesos.apache.org/documentation/latest/endpoints/#files-1). Now you can leverage the consolidated API *for both component and task logs*.
 
-In versions of DC/OS prior to 1.11, node and component logs were managed by `journald`. However, the [Mesos task journald log sink was disabled due to [journald performance issues](https://docs.mesosphere.com/1.12/installing/production/advanced-configuration/configuration-reference/#mesos-container-log-sink). So container log files for older versions are only accessible via the [Mesos task sandbox files API](http://mesos.apache.org/documentation/latest/sandbox/).
+In versions of DC/OS prior to 1.11, node and component logs were managed by `journald`. However, the Mesos task `journald` log sink was disabled due to [`journald` performance issues](https://docs.mesosphere.com/1.12/installing/production/advanced-configuration/configuration-reference/#mesos-container-log-sink). Now container log files for older versions are only accessible via the [Mesos task sandbox files API](http://mesos.apache.org/documentation/latest/sandbox/).
 
 The following code may be useful:
 
@@ -46,6 +46,7 @@ curl -k -H "Authorization: token=${DCOS_AUTH_TOKEN}" "${DCOS_URL}/agent/${AGENT_
 ```
 
 <a name="routes"></a>
+
 # Routes
 
 Access to the Logging API is proxied through Admin Router on each node using the following route:
@@ -65,7 +66,7 @@ To determine the address of your cluster, see [Cluster Access](/1.13/api/access/
 
 ## Discovery Endpoints
 
-Master routes which are serving task logs are also called *'discovery endpoints'*. When the user makes a GET request to a discovery endpoint, the user is redirected to the agent node with the desired endpoint.
+Master routes which are serving task logs are also called **discovery endpoints**. When the user makes a GET request to a discovery endpoint, the user is redirected to the agent node with the desired endpoint.
 
 The parameters used in the request come from mesos `state.json` and are called "task metadata".
 
@@ -80,7 +81,7 @@ The Logging API also requires authorization via the following permissions:
 | /system/v1/logs/v2/ | dcos:adminrouter:ops:system-logs |
 | /system/v1/agent/{agent_id}/logs/v2/ | dcos:adminrouter:system:agent |
 
-All routes may also be reached by users with the _dcos:superuser_ permission. To assign permissions to your account, see [Permissions Reference](/1.13/security/ent/perms-reference/).
+All routes may also be reached by users with the `dcos:superuser_ permission`. To assign permissions to your account, see [Permissions Reference](/1.13/security/ent/perms-reference/).
 
 # Format
 
@@ -94,6 +95,6 @@ DC/OS Logging follows the [Server-Sent-Event specifications](https://www.w3.org/
 
 # Resources
 
- The following resources are available under both of the [above routes](#routes):
+The following resources are available under both of the [above routes](#routes):
 
- [swagger api='/1.12/api/logs2.yaml']
+[swagger api='/1.12/api/logs2.yaml']
